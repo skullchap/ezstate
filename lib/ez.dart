@@ -64,7 +64,7 @@ class EZ<T> extends StatelessWidget {
     var ezNotifier = _eznotifiers[k];
     if (ezNotifier == null) {
       _eznotifiers[k] = EzValue<T>(k, initialValue, persist: persist);
-    } 
+    }
 //     else {
 //       log("ez: $k already exist");
 //     }
