@@ -1,0 +1,19 @@
+name: ezstate
+description: Easy State Manager for Flutter
+publish_to: 'none'
+version: 0.0.69
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ezstate:
+    git:
+      url: https://github.com/skullchap/ezstate.git
+      ref: master
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
