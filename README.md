@@ -55,6 +55,18 @@ EZ(
   
 // ... 
 ```
+### Add to project at pubspec.yaml under dependencies (maybe one day at pub.dev):
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+    
+  ezstate:
+    git:
+      url: https://github.com/skullchap/ezstate.git
+      ref: master
+```
+
 # License
 
 MIT
