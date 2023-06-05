@@ -55,6 +55,15 @@ EZ(
   
 // ... 
 ```
+
+To watch state change at multiple widgets, skip initial value:
+```dart
+EZ(
+  ezCounter,
+  builder: (value) => SomeWidget(value),
+)
+```
+
 ### Add to project at pubspec.yaml under dependencies (maybe one day at pub.dev):
 ```yaml
 dependencies:
@@ -67,6 +76,8 @@ dependencies:
       ref: master
 ```
 
+# Changes
+[0.0.70] - Added ability to watch state change at multiple widgets
 # License
 
 MIT

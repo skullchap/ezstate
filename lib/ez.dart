@@ -72,7 +72,9 @@ class EZ<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    set(k, initialValue: initialValue, persist: this.persist);
+    if (initialValue != null) {
+      set(k, initialValue: initialValue, persist: persist);
+    }
     return ValueListenableBuilder(
         valueListenable: get(k).notifier,
         builder: (context, v, __) {
