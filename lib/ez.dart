@@ -42,13 +42,13 @@ class EZ<T> extends StatelessWidget {
   const EZ(
     this.k, {
     super.key,
-    required this.initialValue,
+    this.initialValue,
     this.persist = false,
     required this.builder,
   });
 
   final String k;
-  final T initialValue;
+  final T? initialValue;
   final bool persist;
   final Widget Function(T value) builder;
 
