@@ -12,11 +12,11 @@ import 'package:flutter/widgets.dart';
 class EzValue<T> {
   EzValue(this.k, this.v, {this.persist = false}) {
     notifier = ValueNotifier<T>(v);
-    if (this.persist && getPersist != null) {
+    if (persist && getPersist != null) {
       var val = getPersist!(k);
       if (val != null) notifier.value = val;
     }
-    if (!this.persist && setPersist != null) {
+    if (!persist && setPersist != null) {
       setPersist!(k, null);
     }
   }
@@ -32,7 +32,7 @@ class EzValue<T> {
 
   set value(T newValue) {
     notifier.value = newValue;
-    if (this.persist && setPersist != null) {
+    if (persist && setPersist != null) {
       setPersist!(k, newValue);
     }
   }
@@ -41,11 +41,11 @@ class EzValue<T> {
 class EZ<T> extends StatelessWidget {
   const EZ(
     this.k, {
-    super.key,
+    Key? key,
     this.initialValue,
     this.persist = false,
     required this.builder,
-  });
+  }) : super(key: key);
 
   final String k;
   final T? initialValue;
@@ -77,7 +77,7 @@ class EZ<T> extends StatelessWidget {
     }
     return ValueListenableBuilder(
         valueListenable: get(k).notifier,
-        builder: (context, v, __) {
+        builder: (context, dynamic v, __) {
           return builder(v);
         });
   }
