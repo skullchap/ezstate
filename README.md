@@ -1,5 +1,5 @@
 # ezstate
-### ~65 loc state manager for flutter
+### ~70 loc state manager for flutter
 
 Wrap your widget with EZ builder and set unique key to it:
 
