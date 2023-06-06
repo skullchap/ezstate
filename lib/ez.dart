@@ -1,5 +1,5 @@
 /*
-* Easy State Manager for Flutter
+* Easy State Manager for Flutter - [0.0.2]
 *
 * Copyright (C) by skullchap - https://github.com/skullchap
 *

@@ -77,7 +77,7 @@ dependencies:
 ```
 
 # Changes
-[0.0.70] - Added ability to watch state change at multiple widgets
+[0.0.2] - Added ability to watch state change at multiple widgets
 # License
 
 MIT
