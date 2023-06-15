@@ -34,7 +34,7 @@ void main() async {
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const MainApp({Key? key});
 
   final ezCounter = "counter";
 
@@ -66,13 +66,13 @@ class MainApp extends StatelessWidget {
                   children: [
                     CupertinoButton(
                       color: Colors.black,
-                      onPressed: () => EZ.get(ezCounter).value++,
+                      onPressed: () => EZ.get<int>(ezCounter).value++,
                       child: const Text("Click me",
                           style: TextStyle(color: Colors.white)),
                     ),
                     CupertinoButton(
                       color: Colors.black,
-                      onPressed: () => EZ.get(ezCounter).value = 0,
+                      onPressed: () => EZ.get<int>(ezCounter).value = 0,
                       child: const Text("Reset",
                           style: TextStyle(color: Colors.white)),
                     ),
