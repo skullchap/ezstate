@@ -1,5 +1,5 @@
 # ezstate
-### ~70 loc state manager for flutter
+#### ~70 loc state manager for flutter
 
 ezstate is a simple and lightweight state management tool for Flutter applications. It provides an easy way to manage and share state across your application without the need for complex setup or boilerplate code. 
 
@@ -10,8 +10,6 @@ ezstate provides the following features:
 - Easy to use:  ezstate simplifies the process of creating and managing state by providing a convenient builder function and a shared registry of state objects. 
 - Lightweight:  ezstate is a lightweight package that doesn't add unnecessary complexity or overhead to your application. 
 - Persistence:  ezstate provides an optional persistence feature that allows you to save state across app sessions. 
-
-
 
 ## Usage
 
@@ -25,6 +23,7 @@ final ezCounter = "counter"; // key
 EZ(
   ezCounter,
   initialValue: 0, // can be any type of any value
+  disposable: true, // by default, it's false, but if's true, the key and value will be dropped when the widget is disposed
   builder: (value) => Text("$value"),
 )
 ```
@@ -65,6 +64,7 @@ EZ(
   ezCounter,
   initialValue: 0,
   persist: true,  // state will be preserved after app restart
+  disposable: false, // disposable should never be enabled, while persist is enable and viceversa
   builder: (value) => Text("$value"),
 )
   
@@ -92,6 +92,8 @@ dependencies:
 ```
 
 # Changes
+[0.0.3] - Added `delete` and `has` methods to EZ and added `disposable` flag to constructor
+
 [0.0.2] - Added ability to watch state change at multiple widgets
 # License
 

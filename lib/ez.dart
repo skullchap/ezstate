@@ -159,6 +159,10 @@ class _EZState<T> extends State<EZ<T>> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.disposable && widget.persist) {
+      throw Exception(
+          "You can't enable disposable and persist at the same time.");
+    }
     return ValueListenableBuilder(
         valueListenable: EZ.get(widget.k).notifier,
         builder: (context, dynamic v, __) {
