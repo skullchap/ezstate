@@ -34,7 +34,7 @@ void main() async {
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({Key? key});
+  const MainApp({Key? key}) : super(key: key);
 
   final ezCounter = "counter";
 

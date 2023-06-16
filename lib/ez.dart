@@ -74,6 +74,7 @@ class EzValue<T> {
 /// - `initialValue`: An optional generic value of type `T` that represents the initial value of the `EZ` object.
 /// - `persist`: An optional boolean value that indicates whether the value should be persisted.
 /// - `builder`: A required `Widget Function(T value)` that takes the current value of the `EZ` object and returns a `Widget`.
+/// - `disposable`: An optional boolean value that indicates whether the value should be remove from the map at the end of the lifetime of `EZ`
 ///
 /// #### Methods:
 /// - `get`: A static method that takes a `String` key and returns the corresponding `EzValue` object if it exists.
@@ -84,24 +85,26 @@ class EzValue<T> {
 /// `EZ.set<String>('myKey', initialValue: 'initialValue', persist: true); `
 ///
 /// `EZ<String>('myKey', builder: (value) => Text(value)); `
-class EZ<T> extends StatelessWidget {
+class EZ<T> extends StatefulWidget {
   const EZ(
     this.k, {
     Key? key,
     this.initialValue,
     this.persist = false,
+    this.disposable = false,
     required this.builder,
   }) : super(key: key);
 
   final String k;
   final T? initialValue;
   final bool persist;
+  final bool disposable;
   final Widget Function(T value) builder;
 
   static final Map<String, EzValue> _eznotifiers = {};
 
   /// A static method that takes a  String  key and returns the corresponding `EzValue` object if it exists.
-  static EzValue<T> get<T>(key) {
+  static EzValue<T> get<T>(String key) {
     var value = _eznotifiers[key];
     if (value != null) return value as EzValue<T>;
     throw Exception("EzValue `$value` isn't set yet");
@@ -116,15 +119,50 @@ class EZ<T> extends StatelessWidget {
     }
   }
 
+  /// A static method that takes a `String` key and deletes
+  /// a value associated with a specific key from the internal map.
+  ///
+  /// It returns the deleted value as an EzValue object of the same type
+  /// as the original value. If the key is not found in the map, it returns `null`.
+  static EzValue<T>? delete<T>(String key) {
+    return _eznotifiers.remove(key) as EzValue<T>?;
+  }
+
+  /// A static method that takes a `String` key
+  /// and returns whether a given key exists
+  /// in the internal map.
+  static bool has(String key) {
+    return _eznotifiers.containsKey(key);
+  }
+
+  @override
+  State<EZ<T>> createState() => _EZState<T>();
+}
+
+class _EZState<T> extends State<EZ<T>> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialValue != null) {
+      EZ.set(widget.k,
+          initialValue: widget.initialValue!, persist: widget.persist);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (widget.disposable == true) {
+      EZ.delete(widget.k);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (initialValue != null) {
-      set(k, initialValue: initialValue!, persist: persist);
-    }
     return ValueListenableBuilder(
-        valueListenable: get(k).notifier,
+        valueListenable: EZ.get(widget.k).notifier,
         builder: (context, dynamic v, __) {
-          return builder(v);
+          return widget.builder(v);
         });
   }
 }
