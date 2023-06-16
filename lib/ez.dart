@@ -137,7 +137,9 @@ class EZ<T> extends StatefulWidget {
 
   @override
   State<EZ<T>> createState() => _EZState<T>();
+}
 
+class _EZState<T> extends State<EZ<T>> {
   @override
   void dispose() {
     if (widget.disposable == true) {
