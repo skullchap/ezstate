@@ -1,5 +1,5 @@
 /*
-* Easy State Manager for Flutter - [0.0.2]
+* Easy State Manager for Flutter - [0.0.3]
 *
 * Copyright (C) by skullchap - https://github.com/skullchap
 *
@@ -139,22 +139,12 @@ class EZ<T> extends StatefulWidget {
   State<EZ<T>> createState() => _EZState<T>();
 }
 
-class _EZState<T> extends State<EZ<T>> {
-  @override
-  void initState() {
-    super.initState();
-    if (widget.initialValue != null) {
-      EZ.set(widget.k,
-          initialValue: widget.initialValue!, persist: widget.persist);
-    }
-  }
-
   @override
   void dispose() {
-    super.dispose();
     if (widget.disposable == true) {
       EZ.delete(widget.k);
     }
+    super.dispose();
   }
 
   @override
@@ -162,6 +152,10 @@ class _EZState<T> extends State<EZ<T>> {
     if (widget.disposable && widget.persist) {
       throw Exception(
           "You can't enable disposable and persist at the same time.");
+    }
+    if (widget.initialValue != null) {
+      EZ.set(widget.k,
+          initialValue: widget.initialValue!, persist: widget.persist);
     }
     return ValueListenableBuilder(
         valueListenable: EZ.get(widget.k).notifier,
