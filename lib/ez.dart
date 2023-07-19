@@ -107,7 +107,7 @@ class EZ<T> extends StatefulWidget {
   static EzValue<T> get<T>(String key) {
     var value = _eznotifiers[key];
     if (value != null) return value as EzValue<T>;
-    throw Exception("EzValue `$value` isn't set yet");
+    throw Exception("EzValue `$key` isn't set yet");
   }
 
   /// A static method that takes a `String` key and an value of type `T`
